@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The New Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lora:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header class="newspaper-header">
+        <div class="header-top">
+            <div id="currentDate"></div>
+            <div class="auth-controls">
+                <span id="userDisplay" style="display: none; margin-right: 10px;"></span>
+                <button id="authBtn" class="auth-btn">Login / Register</button>
+            </div>
+        </div>
+        <hr class="header-line">
+        <h1 class="newspaper-title">The Tech Hub</h1>
+        <p class="tagline" style="text-align: center; font-style: italic; margin-top: -10px;">AI • Startups • Future</p>
+
+        <nav class="main-nav">
+            <a href="#" id="navHome" class="nav-link active">Home</a>
+            <a href="#" id="navTech" class="nav-link">Tech News</a>
+        </nav>
+
+        <hr class="header-line double">
+
+        <div class="header-bottom">
+            <div class="search-controls">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search topics...">
+
+                <select id="timeRange" class="filter-select">
+                    <option value="">Any Time</option>
+                    <option value="today">Today</option>
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                </select>
+
+
+                <button id="searchBtn" class="search-btn">Search</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Home View -->
+        <div id="homeView">
+            <div id="news-grid" class="news-grid">
+                <!-- News articles will be injected here -->
+                <div class="loading">
+                    <div class="spinner"></div>Loading tech news...
+                </div>
+            </div>
+            <div class="load-more-container" style="text-align: center; margin-top: 30px;">
+                <button id="loadMoreBtn" class="load-more-btn">Load More Stories</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Article Modal -->
+    <div id="articleModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modalTitle">Article Title</h2>
+            <img id="modalImage" class="modal-image" src="" alt="Article Image">
+            <p id="modalDescription">Article description goes here...</p>
+            <a id="modalLink" href="#" target="_blank" class="read-more">Read Full Story</a>
+
+            <div class="interaction-section">
+                <div class="upvote-container">
+                    <button id="modalUpvoteBtn" class="upvote-btn">
+                        🔥 Upvote (<span id="modalUpvoteCount">0</span>)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content auth-modal-content">
+            <span class="close-button auth-close">&times;</span>
+            <h2 id="authTitle">Login</h2>
+            <form id="authForm" class="auth-form">
+                <input type="text" id="usernameInput" placeholder="Username" required>
+                <input type="password" id="passwordInput" placeholder="Password" required>
+                <button type="submit" id="authSubmitBtn">Login</button>
+            </form>
+            <p id="authSwitchText">Don't have an account? <a href="#" id="authSwitchLink">Register here</a></p>
+            <p id="authError" class="error-text"></p>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
