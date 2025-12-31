@@ -61,6 +61,115 @@
                 <button id="loadMoreBtn" class="load-more-btn">Load More Stories</button>
             </div>
         </div>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials-section">
+            <h2 class="section-title">Testimonials</h2>
+            <hr class="section-line">
+
+            <div class="testimonials-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Johnson"
+                            class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h3 class="testimonial-name">Sarah Johnson (2018-2022)</h3>
+                            <p class="testimonial-position">SOFTWARE ENGINEER AT GOOGLE, USA</p>
+                            <p class="testimonial-role">FORMER STUDENT, TECH HUB READER</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"The Tech Hub has been my go-to source for staying updated with the latest in technology. The
+                            curated articles on AI and startups have helped me stay ahead in my career. The platform's
+                            clean interface and reliable content make it an essential daily read for any tech enthusiast
+                            looking to understand the rapidly evolving tech landscape."</p>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rajesh Kumar"
+                            class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h3 class="testimonial-name">Rajesh Kumar (2016-2020)</h3>
+                            <p class="testimonial-position">CLOUD SOLUTIONS ARCHITECT AT MICROSOFT, INDIA</p>
+                            <p class="testimonial-role">TECH ENTREPRENEUR & CONTRIBUTOR</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"As someone who transitioned from engineering to cloud architecture, The Tech Hub provided
+                            invaluable insights during my journey. The articles on emerging technologies and startup
+                            ecosystems are exceptionally well-researched. I've recommended this platform to countless
+                            colleagues who are looking to expand their technical knowledge and stay relevant in the
+                            industry."</p>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emily Chen"
+                            class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h3 class="testimonial-name">Emily Chen (2019-2023)</h3>
+                            <p class="testimonial-position">AI RESEARCH SCIENTIST AT OPENAI, USA</p>
+                            <p class="testimonial-role">PHD IN MACHINE LEARNING</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"What sets The Tech Hub apart is its ability to break down complex AI concepts into
+                            accessible content without sacrificing depth. During my research at Stanford, I often found
+                            myself referencing articles from here to understand industry applications of theoretical
+                            concepts. It bridges the gap between academia and the tech industry brilliantly."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feedback Section -->
+        <section class="feedback-section">
+            <h2 class="section-title">Share Your Feedback</h2>
+            <hr class="section-line">
+
+            <div class="feedback-container">
+                <p class="feedback-intro">We'd love to hear from you! Help us improve The Tech Hub by sharing your
+                    thoughts.</p>
+
+                <form id="feedbackForm" class="feedback-form">
+                    <div class="form-group">
+                        <label for="feedbackName">Name</label>
+                        <input type="text" id="feedbackName" placeholder="Your name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="feedbackEmail">Email</label>
+                        <input type="email" id="feedbackEmail" placeholder="your.email@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="feedbackRating">Rating</label>
+                        <select id="feedbackRating" required>
+                            <option value="">Select rating</option>
+                            <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+                            <option value="4">⭐⭐⭐⭐ Good</option>
+                            <option value="3">⭐⭐⭐ Average</option>
+                            <option value="2">⭐⭐ Below Average</option>
+                            <option value="1">⭐ Poor</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="feedbackMessage">Your Feedback</label>
+                        <textarea id="feedbackMessage" placeholder="Tell us what you think..." rows="5"
+                            required></textarea>
+                    </div>
+
+                    <button type="submit" class="feedback-submit-btn">Submit Feedback</button>
+                </form>
+            </div>
+        </section>
     </main>
 
     <!-- Article Modal -->

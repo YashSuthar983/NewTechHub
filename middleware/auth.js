@@ -1,15 +1,14 @@
-const jwt = require('jsonwebtoken');
+// Simple auth middleware - checks for username in request header
+const authenticateUser = (req, res, next) => {
+    const username = req.headers['x-username'];
 
-const authenticateToken = (req, res, next) => {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-    if (!token) return res.sendStatus(401);
+    if (!username) {
+        return res.status(401).json({ error: 'Authentication required' });
+    }
 
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-        if (err) return res.sendStatus(403);
-        req.user = user;
-        next();
-    });
+    // Set user info on request
+    req.user = { username };
+    next();
 };
 
-module.exports = authenticateToken;
+module.exports = authenticateUser;

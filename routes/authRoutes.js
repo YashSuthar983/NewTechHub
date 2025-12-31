@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-// Register - Simple version without bcrypt
+// Register - Simple version
 router.post('/register', async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -36,7 +35,7 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// Login - Simple password comparison
+// Login - Simple password comparison, no JWT
 router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -48,8 +47,8 @@ router.post('/login', async (req, res) => {
 
         // Simple password comparison (no bcrypt)
         if (password === user.password) {
-            const token = jwt.sign({ username: user.username }, process.env.JWT_SECRET);
-            res.json({ token, username: user.username });
+            // Just return username - no JWT token
+            res.json({ username: user.username });
         } else {
             res.status(401).json({ error: 'Invalid credentials' });
         }

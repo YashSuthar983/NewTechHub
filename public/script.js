@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
         category: '',
         timeRange: '',
         sortBy: 'publishedAt',
-        token: localStorage.getItem('token'),
         user: localStorage.getItem('username')
     };
 
@@ -61,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Auth Logic ---
     function updateAuthUI() {
-        if (state.token) {
+        if (state.user) {
             els.userDisplay.textContent = `Welcome, ${state.user}`;
             els.userDisplay.style.display = 'inline';
             els.authBtn.textContent = 'Logout';
@@ -72,10 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     els.authBtn.onclick = () => {
-        if (state.token) {
-            localStorage.removeItem('token');
+        if (state.user) {
             localStorage.removeItem('username');
-            state.token = null;
             state.user = null;
             updateAuthUI();
             Toast.info('Logged out');
@@ -119,9 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (res.ok) {
                 if (isLoginMode) {
-                    state.token = data.token;
                     state.user = data.username;
-                    localStorage.setItem('token', data.token);
                     localStorage.setItem('username', data.username);
                     updateAuthUI();
                     els.authModal.style.display = 'none';
@@ -218,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     els.modalUpvoteBtn.onclick = async () => {
-        if (!state.token) {
+        if (!state.user) {
             Toast.info('Login to upvote');
             els.authModal.style.display = 'block';
             return;
@@ -229,25 +224,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${state.token}`
+                    'X-Username': state.user
                 },
                 body: JSON.stringify({ articleId: encodeURIComponent(currentArticle.url) })
             });
             if (res.status === 401) {
-                Toast.error('Session expired');
-                state.token = null;
+                Toast.error('Please login again');
+                state.user = null;
+                localStorage.removeItem('username');
                 updateAuthUI();
                 return;
             }
             const data = await res.json();
-            els.modalUpvoteCount.textContent = data.upvotes;
 
-            // Update the article object so upvote count persists
-            if (currentArticle) {
-                currentArticle.upvotes = data.upvotes;
+            if (data.error) {
+                Toast.error(data.error);
+            } else {
+                els.modalUpvoteCount.textContent = data.upvotes;
+
+                // Update the article object so upvote count persists
+                if (currentArticle) {
+                    currentArticle.upvotes = data.upvotes;
+                }
+
+                Toast.success('Upvoted!');
             }
-
-            Toast.success('Upvoted!');
         } catch (err) {
             Toast.error('Failed to upvote');
         } finally {
