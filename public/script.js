@@ -312,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             try {
-                const res = await fetch('/api/feedback', {
+                const res = await fetch('/api/feedback-file', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(feedbackData)

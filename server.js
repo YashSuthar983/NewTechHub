@@ -35,5 +35,56 @@ app.post('/api/feedback', async (req, res) => {
     }
 });
 
+// File-based feedback saving (Alternative approach)
+const fs = require('fs');
+const path = require('path');
+
+app.post('/api/feedback-file', (req, res) => {
+    try {
+        const { name, email, mobile, rating, message } = req.body;
+
+        // Create formatted feedback entry
+        const timestamp = new Date().toISOString();
+        const feedbackEntry = `
+========================================
+Date: ${timestamp}
+Name: ${name}
+Email: ${email}
+Mobile: ${mobile}
+Rating: ${rating}/5
+Message: ${message}
+========================================
+
+`;
+
+        // Define file path
+        const filePath = path.join(__dirname, 'feedback.txt');
+
+        // Append to file
+        fs.appendFile(filePath, feedbackEntry, (err) => {
+            if (err) {
+                console.error('Error writing to file:', err);
+                return res.status(500).json({
+                    success: false,
+                    error: 'Failed to save feedback to file'
+                });
+            }
+
+            console.log('Feedback saved to file successfully');
+            res.json({
+                success: true,
+                message: 'Feedback saved to file successfully!'
+            });
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            success: false,
+            error: 'Failed to save feedback'
+        });
+    }
+});
+
 // Start Server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
