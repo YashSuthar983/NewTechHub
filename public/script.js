@@ -297,6 +297,34 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target == els.authModal) els.authModal.style.display = 'none';
     };
 
+
+    // Feedback form validation
+    const feedbackForm = document.getElementById('feedbackForm');
+    if (feedbackForm) {
+        feedbackForm.onsubmit = (e) => {
+            e.preventDefault();
+            const email = document.getElementById('feedbackEmail').value;
+            const mobile = document.getElementById('feedbackMobile').value;
+
+            // Email validation
+            const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRe.test(email)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            // Mobile validation (10 digits)
+            const mobileRe = /^\d{10}$/;
+            if (!mobileRe.test(mobile)) {
+                alert("Please enter a valid 10-digit mobile number.");
+                return;
+            }
+
+            alert("Feedback submitted successfully!");
+            feedbackForm.reset();
+        };
+    }
+
     // --- Init ---
     updateAuthUI();
     fetchNews();
