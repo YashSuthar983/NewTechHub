@@ -1,6 +1,6 @@
 :root {
-    --bg-color: #f5e6d3;
-    /* Warm old paper color - sepia tone */
+    --bg-color: #e3f2fd;
+    /* Light blue background */
     --text-color: #3e2723;
     /* Deep warm brown */
     --accent-color: #d4813e;
@@ -8,7 +8,7 @@
     --border-color: #8d6e63;
     /* Soft brown border */
     --font-headline: 'Playfair Display', serif;
-    --font-body: 'Lora', serif;
+    --font-body: 'Arial', sans-serif;
     --success-color: #6d8b60;
     /* Muted olive green */
     --error-color: #b85c50;
