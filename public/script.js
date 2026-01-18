@@ -297,6 +297,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target == els.authModal) els.authModal.style.display = 'none';
     };
 
+
+    // Clear button
+    const clearBtn = document.getElementById('clearBtn');
+    if (clearBtn) {
+        clearBtn.onclick = () => {
+            const form = document.getElementById('feedbackForm');
+            if (form) form.reset();
+            alert("Form cleared!");
+        };
+    }
+
     // --- Init ---
     updateAuthUI();
     fetchNews();
