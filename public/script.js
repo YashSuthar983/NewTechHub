@@ -297,6 +297,42 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target == els.authModal) els.authModal.style.display = 'none';
     };
 
+    // Feedback form submission
+    const feedbackForm = document.getElementById('feedbackForm');
+    if (feedbackForm) {
+        feedbackForm.onsubmit = async (e) => {
+            e.preventDefault();
+
+            const feedbackData = {
+                name: document.getElementById('feedbackName').value,
+                email: document.getElementById('feedbackEmail').value,
+                rating: document.getElementById('feedbackRating').value,
+                message: document.getElementById('feedbackMessage').value,
+                mobile: document.getElementById('feedbackMobile').value || ''
+            };
+
+            try {
+                const res = await fetch('/api/feedback', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(feedbackData)
+                });
+
+                const result = await res.json();
+
+                if (result.success) {
+                    Toast.success(result.message || 'Feedback saved to MongoDB!');
+                    feedbackForm.reset();
+                } else {
+                    Toast.error(result.error || 'Failed to save feedback');
+                }
+            } catch (err) {
+                console.error('Feedback submission error:', err);
+                Toast.error('Network error - could not save feedback');
+            }
+        };
+    }
+
     // --- Init ---
     updateAuthUI();
     fetchNews();
