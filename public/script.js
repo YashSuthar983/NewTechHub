@@ -241,12 +241,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 Toast.error(data.error);
             } else {
                 els.modalUpvoteCount.textContent = data.upvotes;
-
-                // Update the article object so upvote count persists
                 if (currentArticle) {
                     currentArticle.upvotes = data.upvotes;
                 }
-
                 Toast.success('Upvoted!');
             }
         } catch (err) {
@@ -301,3 +298,13 @@ document.addEventListener('DOMContentLoaded', () => {
     updateAuthUI();
     fetchNews();
 });
+
+// Cost calculation function
+function calculateTotal() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][id^="service"]');
+    let total = 0;
+    checkboxes.forEach(cb => {
+        if (cb.checked) total += parseFloat(cb.value);
+    });
+    document.getElementById('totalCost').textContent = total;
+}
