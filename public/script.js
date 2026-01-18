@@ -320,8 +320,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            alert("Feedback submitted successfully!");
-            feedbackForm.reset();
+            // Save to backend
+            const feedbackData = {
+                name: document.getElementById('feedbackName').value,
+                email: email,
+                rating: document.getElementById('feedbackRating').value,
+                message: document.getElementById('feedbackMessage').value,
+                mobile: mobile
+            };
+
+            fetch('/api/feedback', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(feedbackData)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Feedback submitted successfully!");
+                        feedbackForm.reset();
+                    } else {
+                        alert("Error saving feedback");
+                    }
+                })
+                .catch(err => alert("Error submitting feedback"));
         };
     }
 
