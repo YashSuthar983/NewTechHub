@@ -297,6 +297,37 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target == els.authModal) els.authModal.style.display = 'none';
     };
 
+
+    // Submit feedback to backend
+    const feedbackForm = document.getElementById('feedbackForm');
+    if (feedbackForm) {
+        feedbackForm.onsubmit = async (e) => {
+            e.preventDefault();
+            const data = {
+                name: document.getElementById('feedbackName').value,
+                email: document.getElementById('feedbackEmail').value,
+                rating: document.getElementById('feedbackRating').value,
+                message: document.getElementById('feedbackMessage').value,
+                mobile: ''
+            };
+
+            try {
+                const res = await fetch('/api/feedback', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await res.json();
+                if (result.success) {
+                    alert("Feedback saved successfully!");
+                    feedbackForm.reset();
+                }
+            } catch (err) {
+                alert("Error saving feedback");
+            }
+        };
+    }
+
     // --- Init ---
     updateAuthUI();
     fetchNews();
