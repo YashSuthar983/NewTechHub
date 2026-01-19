@@ -1,0 +1,3 @@
+# PORT=3000
+# MONGODB_URI=mongodb+srv://jam:jam@cluster0.58s2e.mongodb.net/?appName=Cluster0
+# NEWS_API_KEY=3e34fb75f9304f9c82be873a240959f8
